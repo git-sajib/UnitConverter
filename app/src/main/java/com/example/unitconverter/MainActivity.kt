@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.unitconverter.ui.theme.UnitConverterTheme
+import kotlin.math.roundToInt
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,6 +74,14 @@ fun UnitConverter(){
         mutableStateOf(0.01)
     }
 
+    fun convertUnits(){
+
+        // ?: elvis operator
+        val inputValueDouble = inputValue.toDoubleOrNull() ?: 0.0
+        val result = (inputValueDouble * conversionFactor.value * 100).roundToInt() / 100
+        outputValue = result.toString()
+    }
+
     Column (
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -87,25 +96,33 @@ fun UnitConverter(){
         }, label = { Text(text = "Enter Value")})
         Spacer(modifier = Modifier.height(16.dp))
         Row {
+            // Input Box
             Box {
-                Button(onClick = { /*TODO*/ }) {
+                // Input Button
+                Button(onClick = { iExpanded = true }) {
                     Text(text = "Select")
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down")
                 }
-                DropdownMenu(expanded = false, onDismissRequest = { /*TODO*/ }) {
-                    DropdownMenuItem(text = { Text(text = "Centimeters")}, onClick = { /*TODO*/ })
+                DropdownMenu(expanded = iExpanded, onDismissRequest = { iExpanded = false }) {
+                    DropdownMenuItem(text = { Text(text = "Centimeters")}, onClick = {
+                        iExpanded = false
+                        inputUnit = "Centimeters"
+                        conversionFactor.value = 0.01
+                    })
                     DropdownMenuItem(text = { Text(text = "Meters")}, onClick = { /*TODO*/ })
                     DropdownMenuItem(text = { Text(text = "Millimetres")}, onClick = { /*TODO*/ })
                     DropdownMenuItem(text = { Text(text = "Feet")}, onClick = { /*TODO*/ })
                 }
             }
             Spacer(modifier = Modifier.width(16.dp))
+            // Output Box
             Box {
-                Button(onClick = { /*TODO*/ }) {
+                // Output Button
+                Button(onClick = { oExpanded = true }) {
                     Text(text = "Select")
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down")
                 }
-                DropdownMenu(expanded = false , onDismissRequest = { /*TODO*/ }) {
+                DropdownMenu(expanded = oExpanded , onDismissRequest = { oExpanded = false }) {
                     DropdownMenuItem(text = { Text(text = "Centimeters")}, onClick = { /*TODO*/ })
                     DropdownMenuItem(text = { Text(text = "Meters")}, onClick = { /*TODO*/ })
                     DropdownMenuItem(text = { Text(text = "Millimetres")}, onClick = { /*TODO*/ })
