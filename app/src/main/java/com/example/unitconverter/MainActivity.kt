@@ -108,10 +108,26 @@ fun UnitConverter(){
                         iExpanded = false
                         inputUnit = "Centimeters"
                         conversionFactor.value = 0.01
+                        convertUnits()
                     })
-                    DropdownMenuItem(text = { Text(text = "Meters")}, onClick = { /*TODO*/ })
-                    DropdownMenuItem(text = { Text(text = "Millimetres")}, onClick = { /*TODO*/ })
-                    DropdownMenuItem(text = { Text(text = "Feet")}, onClick = { /*TODO*/ })
+                    DropdownMenuItem(text = { Text(text = "Meters")}, onClick = {
+                        iExpanded = false
+                        inputUnit = "Meters"
+                        conversionFactor.value = 1.0
+                        convertUnits()
+                    })
+                    DropdownMenuItem(text = { Text(text = "Feet")}, onClick = {
+                        iExpanded = false
+                        inputUnit = "Feet"
+                        conversionFactor.value = 0.3048
+                        convertUnits()
+                    })
+                    DropdownMenuItem(text = { Text(text = "Millimeters")}, onClick = {
+                        iExpanded = false
+                        inputUnit = "Millimeters"
+                        conversionFactor.value = 0.001
+                        convertUnits()
+                    })
                 }
             }
             Spacer(modifier = Modifier.width(16.dp))
@@ -125,7 +141,7 @@ fun UnitConverter(){
                 DropdownMenu(expanded = oExpanded , onDismissRequest = { oExpanded = false }) {
                     DropdownMenuItem(text = { Text(text = "Centimeters")}, onClick = { /*TODO*/ })
                     DropdownMenuItem(text = { Text(text = "Meters")}, onClick = { /*TODO*/ })
-                    DropdownMenuItem(text = { Text(text = "Millimetres")}, onClick = { /*TODO*/ })
+                    DropdownMenuItem(text = { Text(text = "Millimeters")}, onClick = { /*TODO*/ })
                     DropdownMenuItem(text = { Text(text = "Feet")}, onClick = { /*TODO*/ })
                 }
             }
